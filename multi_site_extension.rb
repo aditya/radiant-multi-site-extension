@@ -23,13 +23,26 @@ class MultiSiteExtension < Radiant::Extension
     
     Page.send :include, MultiSite::PageExtensions
     Page.send :include, MultiSite::PageTags
+    ResponseCache.send :include, MultiSite::ResponseCacheExtensions
+    User.send :include, MultiSite::UserExtensions
+    Layout.send :include, MultiSite::LayoutExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PageController.send :include, MultiSite::PageControllerExtensions
-    ResponseCache.send :include, MultiSite::ResponseCacheExtensions
+    Admin::SnippetController.send :include, MultiSite::SnippetControllerExtensions
+
     Radiant::Config["dev.host"] = 'preview'
+
     # Add site navigation
     admin.page.index.add :top, "site_subnav"
     admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
+
+    # Make snippets visible only to admins and developers
+    admin.tabs.remove "Snippets"
+    admin.tabs.add "Snippets", "/admin/snippets", :before => "Layouts", :visibility => [:admin, :developer]
+
+    # Add site admin scoping fields
+    admin.user.edit.add :form, "site", :before => "edit_table_footer"
+    admin.layout.edit.add :form, "site", :before => "edit_timestamp"
   end
   
   def deactivate

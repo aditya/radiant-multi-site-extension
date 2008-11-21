@@ -14,12 +14,13 @@
     margin-right: 10px;
   }
 <% end %>
-<div id="sites">
-  <% Site.find(:all).each do |site| %>
-    <% name = (@site == site) ? "<strong>#{site.name}</strong>" : site.name -%>
-    <%= link_to name, page_index_path(:root => site.homepage) %>
-  <% end %>
-</div>
+<% if developer? && Site.count > 1 %>
+  <div id="sites">
+    <strong>Site:</strong> 
+    <%= select_tag('site-selector', options_from_collection_for_select(Site.find(:all), :homepage_id, :name, @site.nil? ? nil : @site.homepage_id), 
+      :onchange => "document.location = '#{page_index_path}?root=' + this.options[this.selectedIndex].value") %>
+  </div>
+<% end %>
 
 <% if Radiant::Config['multi_site.scoped?'] %>
   <% content_for :page_scripts do %>

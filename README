@@ -1,10 +1,11 @@
 = Multi Site
 
 Created by Sean Cribbs, November 2007. Inspired by the original virtual_domain
-behavior.
+behavior. Extended by Nick Plante, March 2008. 
 
 Multi Site allows you to host multiple websites on a single Radiant
-installation.
+installation. It also allows you to assign users to specific sites, scoping
+all their administrative activity to that one domain.
 
 Each site has its own independent sitemap/page-tree and these attributes:
 
@@ -15,6 +16,19 @@ Each site has its own independent sitemap/page-tree and these attributes:
                generating absolute URLs against
   homepage_id: The numerical database ID of the root page (usually
                you can just leave this alone).
+
+Any existing pages that you have will be scoped to the 'Default' site, which
+is the site that will be seen for requests that don't match a particular
+base_domain.
+
+In addition to scoping users to sites, layouts can also be scoped to a
+particular site. Use the selection box on the edit layout page to assign a
+layout to a site. If no site is chosen, the layout will be available for
+selection from any site. Note that snippets are not limited in this way,
+but that access to snippets has been DISABLED for "regular" users (those
+users who are not developers or admins).
+
+If you don't like it, feel free to make suggestions or change it :).
 
 Included images are slightly modified from FamFamFam Silk Icons by Mark James:
 http://www.famfamfam.com/lab/icons/silk/
@@ -30,7 +44,7 @@ http://www.famfamfam.com/lab/icons/silk/
 
 3) Run the extension update task.
 
-  $ rake radiant:extensions:multi_site:update
+  $ rake production radiant:extensions:multi_site:update
 
 4) Restart your server
 
@@ -49,4 +63,4 @@ You can also scope a route to multiple sites with an array:
 == Acknowledgments
 
 Thanks to Digital Pulp, Inc. for funding the initial development of this
-extension as part of the Redken.com project.
+extension as part of the Redken.com project. 

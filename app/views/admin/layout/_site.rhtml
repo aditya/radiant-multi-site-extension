@@ -1,0 +1,4 @@
+<p>
+  <label for="layout_site_id">Site </label>
+  <%= select "layout", "site_id", [['<N/A>', nil]] + Site.find(:all).map { |s| [s.name, s.id] } %>
+</p>

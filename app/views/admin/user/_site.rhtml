@@ -1,0 +1,5 @@
+<tr>
+  <th class="label"><label class="optional" for="user_site_id">Site</label></td>
+  <td class="field" style="text-align: left"><%= select "user", "site_id", [['<N/A>', nil]] + Site.find(:all).map { |s| [s.name, s.id] } %></td>
+  <td class="help">Optional. Please specify a site for this user.</td>
+</tr>

@@ -1,6 +1,10 @@
 class Site < ActiveRecord::Base
+  has_many :users
+  has_many :layouts
+
   acts_as_list
   order_by "position ASC"
+
   class << self
     def find_for_host(hostname = '')
       default, normal = find(:all).partition {|s| s.domain.blank? }
@@ -30,11 +34,11 @@ class Site < ActiveRecord::Base
   
   def create_homepage
     if self.homepage_id.blank?
-        self.homepage = self.build_homepage(:title => "#{self.name} Homepage", 
-                           :slug => "#{self.name.slugify}", :breadcrumb => "Home", 
-                           :status => Status[:draft])
-        self.homepage.parts << PagePart.new(:name => "body", :content => "")
-        save
+      self.homepage = self.build_homepage(:title => "#{self.name} Homepage", 
+                       :slug => "#{self.name.slugify}", :breadcrumb => "Home", 
+                       :status => Status[:draft])
+      self.homepage.parts << PagePart.new(:name => "body", :content => "")
+      save
     end
   end
   
