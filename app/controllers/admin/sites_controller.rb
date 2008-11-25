@@ -1,4 +1,4 @@
-class SitesController < ApplicationController
+class Admin::SitesController < ApplicationController
   # A hack, but the only way it works in something other than dev mode
   write_inheritable_attribute :resourceful_callbacks, {}
   write_inheritable_attribute :resourceful_responses, {}
