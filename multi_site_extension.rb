@@ -9,7 +9,7 @@ class MultiSiteExtension < Radiant::Extension
   
   define_routes do |map|
     map.namespace :admin do |admin|
-      admin.resources :sites, :path_prefix => "/admin", 
+      admin.resources :sites, 
                   :member => {
                     :move_higher => :post,
                     :move_lower => :post,
