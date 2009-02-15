@@ -40,7 +40,7 @@ class MultiSiteExtension < Radiant::Extension
 
     # Make snippets visible only to admins and developers
     admin.tabs.remove "Snippets"
-    admin.tabs.add "Snippets", "/admin/snippets", :before => "Layouts", :visibility => [:admin]
+    admin.tabs.add "Snippets", "/admin/snippets", :visibility => [:admin]
 
     # Add site admin scoping fields
     admin.user.edit.add :form, "site", :before => "edit_table_footer"
