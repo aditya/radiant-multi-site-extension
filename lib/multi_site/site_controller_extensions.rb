@@ -10,6 +10,7 @@ module MultiSite::SiteControllerExtensions
     Page.current_site = Site.find_for_host(request.host)
     if Page.current_site.nil? 
       redirect_to 'http://groupped.com/accounts'
+    end
     true
   end
   
